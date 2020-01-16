@@ -20,6 +20,6 @@ let onInputChange;
 
   onButtonClick = () => {
     if (!currentInputValue) return;
-    englishWordElement.innerText = 'English Value';
+    englishWordElement.innerText = getNumberEnglishWord(currentInputValue);
   };
 })();
