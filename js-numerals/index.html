@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>JS Numerals</title>
-</head>
-<body>
-  <input type="number" placeholder="Numerical Value" id="numerical-input" oninput="onInput(this)" />
-  <button>Get English Phrase</button>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Font Families -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>JS Numerals</title>
+  </head>
+  <body>
+    <div class="app-heading">JS Numerals</div>
+    <div class="app-container">
+      <div class="action-container">
+        <input
+          class="numerical-input"
+          type="number"
+          placeholder="Numerical Value"
+          oninput="onInputChange(this)"
+        />
+        <button class="action-button" onclick="onButtonClick()">
+          Get English Phrase
+        </button>
+      </div>
+      <div class="english-word">&nbsp;</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>

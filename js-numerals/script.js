@@ -1,14 +1,25 @@
-let onInput;
+let onInputChange;
 
 (function() {
-  let inputCurrentValue = '';
+  let currentInputValue = '';
 
-  onInput = (e) => {
+  const numericalInputElement = document.querySelector('.numerical-input');
+  const englishWordElement = document.querySelector('.english-word');
+
+  onInputChange = (e) => {
     const newEnteredValue = e.value;
-    if (newEnteredValue && Number.isInteger(Number(newEnteredValue))) {
-      inputCurrentValue = newEnteredValue;
+    const isEmptyValue = newEnteredValue === '';
+    const isInteger =
+      newEnteredValue && Number.isInteger(Number(newEnteredValue));
+
+    if (isEmptyValue || isInteger) {
+      currentInputValue = newEnteredValue;
     }
-    inputCurrentValue = inputCurrentValue;
-    document.querySelector('#numerical-input').value = inputCurrentValue;
+    numericalInputElement.value = currentInputValue;
+  };
+
+  onButtonClick = () => {
+    if (!currentInputValue) return;
+    englishWordElement.innerText = 'English Value';
   };
 })();
