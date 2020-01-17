@@ -1,4 +1,4 @@
-const getNumberEnglishWord = (number) => {
+const getNumberEnglishWord = (typedNumber) => {
   const lowNumericals = [
     'zero',
     'one',
@@ -41,11 +41,16 @@ const getNumberEnglishWord = (number) => {
     // To convert to number type and remove leading zeros:
     const number = Number(passedNumber);
     let newSolutionPart;
-    console.log(number);
 
-    if (!number && number !== 0) {
-      return '';
-    } else if (number === 0 && solutionParts.length !== 0) {
+    const getOnes = (onesType) => {
+      const head = number.toString()[0];
+      newSolutionPart = `${analyzeNumber(head, true)} ${onesType}`;
+      solutionParts.push(newSolutionPart);
+      if (Number(number.toString().substr(1)))
+        analyzeNumber(number.toString().substr(1));
+    };
+
+    if (!number && typedNumber !== '0') {
       return '';
     }
 
@@ -73,11 +78,7 @@ const getNumberEnglishWord = (number) => {
       if (Number(number.toString().substr(1)))
         analyzeNumber(number.toString().substr(1));
     } else if (numberLength === 4) {
-      const head = number.toString()[0];
-      newSolutionPart = `${analyzeNumber(head, true)} thousand`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(1)))
-        analyzeNumber(number.toString().substr(1));
+      getOnes('thousand');
     } else if (numberLength === 5) {
       const head = number.toString().substr(0, 2);
       newSolutionPart = `${analyzeNumber(head, true)} thousand`;
@@ -93,16 +94,12 @@ const getNumberEnglishWord = (number) => {
         .join(' ')
         .includes('hundred');
 
-      newSolutionPart = `${hasHundred ? '' : ' hundred'} thousand`;
+      newSolutionPart = `${hasHundred ? '' : 'hundred '}thousand`;
       solutionParts.push(newSolutionPart);
       if (Number(number.toString().substr(3)))
         analyzeNumber(number.toString().substr(3));
     } else if (numberLength === 7) {
-      const head = number.toString()[0];
-      newSolutionPart = `${analyzeNumber(head, true)} million`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(1)))
-        analyzeNumber(number.toString().substr(1));
+      getOnes('million');
     } else if (numberLength === 8) {
       const head = number.toString().substr(0, 2);
       newSolutionPart = `${analyzeNumber(head, true)} million`;
@@ -115,16 +112,12 @@ const getNumberEnglishWord = (number) => {
       const hasHundred = [...solutionParts, firstPart]
         .join(' ')
         .includes('hundred');
-      newSolutionPart = `${hasHundred ? '' : ' hundred'} million`;
+      newSolutionPart = `${hasHundred ? '' : 'hundred '}million`;
       solutionParts.push(newSolutionPart);
       if (Number(number.toString().substr(3)))
         analyzeNumber(number.toString().substr(3));
     } else if (numberLength === 10) {
-      const head = number.toString()[0];
-      newSolutionPart = `${analyzeNumber(head, true)} billion`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(1)))
-        analyzeNumber(number.toString().substr(1));
+      getOnes('billion');
     } else if (numberLength === 11) {
       const head = number.toString().substr(0, 2);
       analyzeNumber(head);
@@ -138,16 +131,12 @@ const getNumberEnglishWord = (number) => {
       const hasHundred = [...solutionParts, firstPart]
         .join(' ')
         .includes('hundred');
-      newSolutionPart = `${hasHundred ? '' : ' hundred'} billion`;
+      newSolutionPart = `${hasHundred ? '' : 'hundred '}billion`;
       solutionParts.push(newSolutionPart);
       if (Number(number.toString().substr(3)))
         analyzeNumber(number.toString().substr(3));
     } else if (numberLength === 13) {
-      const head = number.toString()[0];
-      newSolutionPart = `${analyzeNumber(head, true)} trillion`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(1)))
-        analyzeNumber(number.toString().substr(1));
+      getOnes('trillion');
     } else if (numberLength === 14) {
       const head = number.toString().substr(0, 2);
       analyzeNumber(head);
@@ -161,7 +150,7 @@ const getNumberEnglishWord = (number) => {
       const hasHundred = [...solutionParts, firstPart]
         .join(' ')
         .includes('hundred');
-      newSolutionPart = `${hasHundred ? '' : ' hundred'} trillion`;
+      newSolutionPart = `${hasHundred ? '' : 'hundred '}trillion`;
       solutionParts.push(newSolutionPart);
       if (Number(number.toString().substr(3)))
         analyzeNumber(number.toString().substr(3));
@@ -176,14 +165,16 @@ const getNumberEnglishWord = (number) => {
     return newSolutionPart;
   };
 
-  analyzeNumber(number);
+  analyzeNumber(typedNumber);
   console.log(solutionParts);
+  const majorValueTypes = ['thousand', 'million', 'billion', 'trillion'];
   return solutionParts
     .map((part, i) => {
       if (
         solutionParts.length > 1 &&
         i === solutionParts.length - 1 &&
-        solutionParts[i - 1].split(' ').length > 1
+        solutionParts[i - 1].split(' ').length > 1 &&
+        !majorValueTypes.includes(part)
       ) {
         return `and ${part}`;
       }
