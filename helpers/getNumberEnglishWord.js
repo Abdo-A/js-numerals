@@ -10,6 +10,7 @@ const getNumberEnglishWord = (typedNumber) => {
     const number = Number(passedNumber);
     let newSolutionPart;
 
+    // function to get ones of entities like thousands, millions, billions, trillions
     const getOnes = (type) => {
       const head = number.toString()[0];
       newSolutionPart = `${analyzeNumber(head, true)} ${type}`;
@@ -18,6 +19,7 @@ const getNumberEnglishWord = (typedNumber) => {
         analyzeNumber(number.toString().substr(1));
     };
 
+    // function to get tens of entities like thousands, millions, billions, trillions
     const getTens = (type) => {
       const head = number.toString().substr(0, 2);
       newSolutionPart = `${analyzeNumber(head, true)} ${type}`;
@@ -27,6 +29,7 @@ const getNumberEnglishWord = (typedNumber) => {
         analyzeNumber(number.toString().substr(2));
     };
 
+    // function to get hundreds of entities like thousands, millions, billions, trillions
     const getHundreds = (type) => {
       const head = number.toString().substr(0, 3);
       const firstPart = analyzeNumber(head);
@@ -115,5 +118,7 @@ const getNumberEnglishWord = (typedNumber) => {
       }
       return `${part} `;
     })
-    .join('');
+    .join('').trim();
 };
+
+module.exports = getNumberEnglishWord;

@@ -1,0 +1,23 @@
+{
+  "name": "js-numerals",
+  "version": "1.0.0",
+  "description": "## Instructions",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abdo-A/js-numerals.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abdo-A/js-numerals/issues"
+  },
+  "homepage": "https://github.com/Abdo-A/js-numerals#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}

@@ -1,17 +1,6 @@
-# JavaScript/Front-end Developer - Exercise 1
+## Description
 
-## Instructions
-
-- Fork this project.
-- Write tests.
-- Don't use external libraries for the conversion.
-- Commit the important milestones and not just the final result.
-
-## Exercise description
-
-Create an application that contains a web form, which has a numeric input field and a submit button.
-
-When the user gives an arabic number, the system shows the english phrase of that number.
+A project for converting numbers into words
 
 For example:
 <pre>
@@ -22,4 +11,6 @@ For example:
 17999 == seventeen thousand nine hundred and ninety-nine
 </pre>
 
-That's all.
+
+Find it at:
+https://numbers-mapper.abdo.live/
