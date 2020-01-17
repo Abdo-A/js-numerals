@@ -11,6 +11,7 @@ html {
   --bg-color: ;
   --white-color: #fff;
   --gray-color: #333;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 body {
@@ -20,9 +21,9 @@ body {
 .app-heading {
   text-align: center;
   margin: 18px;
-  font-family: 'Josefin Sans', sans-serif;
   font-size: 52px;
   color: var(--white-color);
+  user-select: none;
 }
 
 .app-container {
@@ -35,7 +36,7 @@ body {
 
 .numerical-input {
   height: 62px;
-  padding: 5px;
+  padding: 5px 15px;
   outline: none;
   border-radius: 8px;
   border: 1px solid var(--white-color);
@@ -48,44 +49,19 @@ body {
   box-shadow: 1px 3px 10px var(--gray-color);
 }
 
-.action-button {
-  height: 62px;
-  padding: 5px 18px;
-  margin-left: 10px;
-  outline: none;
-  border-radius: 8px;
-  border: 1px solid var(--white-color);
-  cursor: pointer;
-  font-size: 20px;
-  color: var(--light-black);
-  transition: all 0.3s;
-  box-shadow: 0.5px 0.5px 1px var(--gray-color);
-}
-
-.action-button:hover {
-  box-shadow: 5px 10px 10px var(--gray-color);
-}
-
-.action-button:active {
-  box-shadow: 0 2px 10px var(--gray-color);
-  transform: translateY(4px);
-}
-
 .english-word {
   margin: 40px;
-  font-size: 20px;
+  font-size: 24px;
+  max-width: 80%;
+  text-align: center;
 }
 
 @media only screen and (max-width: 768px) {
   body {
     height: 60%;
   }
-  .action-container {
-    display: flex;
-    flex-direction: column;
-  }
-  .action-button {
-    margin-top: 35px;
-    margin-left: 0;
+
+  .app-heading {
+    font-size: 32px;
   }
 }

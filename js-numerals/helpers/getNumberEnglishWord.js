@@ -145,7 +145,7 @@ const getNumberEnglishWord = (typedNumber) => {
       if (Number(number.toString().substr(3)))
         analyzeNumber(number.toString().substr(3));
     } else if (numberLength > 15) {
-      solutionParts.push('Number is too big');
+      solutionParts.push('Number is too big 🙄');
     }
 
     if (onlyReturn) {
