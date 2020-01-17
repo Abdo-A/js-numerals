@@ -1,39 +1,7 @@
 const getNumberEnglishWord = (typedNumber) => {
-  const lowNumericals = [
-    'zero',
-    'one',
-    'two',
-    'three',
-    'four',
-    'five',
-    'six',
-    'seven',
-    'eight',
-    'nine',
-  ];
-  const specialNumericals = [
-    'ten',
-    'eleven',
-    'twelve',
-    'thirteen',
-    'fourteen',
-    'fifteen',
-    'sixteen',
-    'seventeen',
-    'eighteen',
-    'nineteen',
-    'twenty',
-  ];
-  const highNumericals = [
-    'twenty',
-    'thirty',
-    'fourty',
-    'fifty',
-    'sixty',
-    'seventy',
-    'eighty',
-    'ninety',
-  ];
+  const lowNumericals = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+  const specialNumericals = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
+  const highNumericals = ["twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"];
 
   const solutionParts = [];
 
@@ -42,22 +10,34 @@ const getNumberEnglishWord = (typedNumber) => {
     const number = Number(passedNumber);
     let newSolutionPart;
 
-    const getOnes = (onesType) => {
+    const getOnes = (type) => {
       const head = number.toString()[0];
-      newSolutionPart = `${analyzeNumber(head, true)} ${onesType}`;
+      newSolutionPart = `${analyzeNumber(head, true)} ${type}`;
       solutionParts.push(newSolutionPart);
       if (Number(number.toString().substr(1)))
         analyzeNumber(number.toString().substr(1));
     };
 
-    const getTens = (onesType) => {
+    const getTens = (type) => {
       const head = number.toString().substr(0, 2);
-      newSolutionPart = `${analyzeNumber(head, true)} ${onesType}`;
-      console.log('new', newSolutionPart);
+      newSolutionPart = `${analyzeNumber(head, true)} ${type}`;
 
       solutionParts.push(newSolutionPart);
       if (Number(number.toString().substr(2)))
         analyzeNumber(number.toString().substr(2));
+    };
+
+    const getHundreds = (type) => {
+      const head = number.toString().substr(0, 3);
+      const firstPart = analyzeNumber(head);
+      const hasHundred = [...solutionParts, firstPart]
+        .join(' ')
+        .includes('hundred');
+
+      newSolutionPart = `${hasHundred ? '' : 'hundred '}${type}`;
+      solutionParts.push(newSolutionPart);
+      if (Number(number.toString().substr(3)))
+        analyzeNumber(number.toString().substr(3));
     };
 
     if (!number && typedNumber !== '0') {
@@ -65,6 +45,7 @@ const getNumberEnglishWord = (typedNumber) => {
     }
 
     const numberLength = number.toString().length;
+
     if (numberLength === 1) {
       newSolutionPart = lowNumericals[number];
       solutionParts.push(newSolutionPart);
@@ -74,7 +55,6 @@ const getNumberEnglishWord = (typedNumber) => {
         solutionParts.push(newSolutionPart);
       } else {
         const head = number.toString()[0];
-        console.log('oho', number.toString().substr(1));
         newSolutionPart = `${highNumericals[head - 2]} ${analyzeNumber(
           number.toString().substr(1),
           true,
@@ -92,58 +72,25 @@ const getNumberEnglishWord = (typedNumber) => {
     } else if (numberLength === 5) {
       getTens('thousand');
     } else if (numberLength === 6) {
-      const head = number.toString().substr(0, 3);
-      const firstPart = analyzeNumber(head);
-      const hasHundred = [...solutionParts, firstPart]
-        .join(' ')
-        .includes('hundred');
-
-      newSolutionPart = `${hasHundred ? '' : 'hundred '}thousand`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(3)))
-        analyzeNumber(number.toString().substr(3));
+      getHundreds('thousand');
     } else if (numberLength === 7) {
       getOnes('million');
     } else if (numberLength === 8) {
       getTens('million');
     } else if (numberLength === 9) {
-      const head = number.toString().substr(0, 3);
-      const firstPart = analyzeNumber(head);
-      const hasHundred = [...solutionParts, firstPart]
-        .join(' ')
-        .includes('hundred');
-      newSolutionPart = `${hasHundred ? '' : 'hundred '}million`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(3)))
-        analyzeNumber(number.toString().substr(3));
+      getHundreds('million');
     } else if (numberLength === 10) {
       getOnes('billion');
     } else if (numberLength === 11) {
       getTens('billion');
     } else if (numberLength === 12) {
-      const head = number.toString().substr(0, 3);
-      const firstPart = analyzeNumber(head);
-      const hasHundred = [...solutionParts, firstPart]
-        .join(' ')
-        .includes('hundred');
-      newSolutionPart = `${hasHundred ? '' : 'hundred '}billion`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(3)))
-        analyzeNumber(number.toString().substr(3));
+      getHundreds('billion');
     } else if (numberLength === 13) {
       getOnes('trillion');
     } else if (numberLength === 14) {
       getTens('trillion');
     } else if (numberLength === 15) {
-      const head = number.toString().substr(0, 3);
-      const firstPart = analyzeNumber(head);
-      const hasHundred = [...solutionParts, firstPart]
-        .join(' ')
-        .includes('hundred');
-      newSolutionPart = `${hasHundred ? '' : 'hundred '}trillion`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(3)))
-        analyzeNumber(number.toString().substr(3));
+      getHundreds('trillion');
     } else if (numberLength > 15) {
       solutionParts.push('Number is too big 🙄');
     }
@@ -151,12 +98,10 @@ const getNumberEnglishWord = (typedNumber) => {
     if (onlyReturn) {
       solutionParts.pop();
     }
-    console.log(newSolutionPart);
     return newSolutionPart;
   };
 
   analyzeNumber(typedNumber);
-  console.log(solutionParts);
   const majorValueTypes = ['thousand', 'million', 'billion', 'trillion'];
   return solutionParts
     .map((part, i) => {
