@@ -16,10 +16,14 @@ let onInputChange;
       currentInputValue = newEnteredValue;
     }
     numericalInputElement.value = currentInputValue;
+    getEnglishWord();
   };
 
-  onButtonClick = () => {
-    if (!currentInputValue) return;
-    englishWordElement.innerText = getNumberEnglishWord(currentInputValue);
+  getEnglishWord = () => {
+    if (!currentInputValue) {
+      englishWordElement.innerHTML = '&nbsp;';
+    } else {
+      englishWordElement.innerText = getNumberEnglishWord(currentInputValue);
+    }
   };
 })();
