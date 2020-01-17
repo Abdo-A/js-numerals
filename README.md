@@ -2,6 +2,8 @@
 
 A project for converting numbers into words
 
+It is built in vanila JS, as using React for such a small project would be much.
+
 For example:
 <pre>
 7    == seven
