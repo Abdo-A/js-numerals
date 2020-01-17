@@ -50,6 +50,16 @@ const getNumberEnglishWord = (typedNumber) => {
         analyzeNumber(number.toString().substr(1));
     };
 
+    const getTens = (onesType) => {
+      const head = number.toString().substr(0, 2);
+      newSolutionPart = `${analyzeNumber(head, true)} ${onesType}`;
+      console.log('new', newSolutionPart);
+
+      solutionParts.push(newSolutionPart);
+      if (Number(number.toString().substr(2)))
+        analyzeNumber(number.toString().substr(2));
+    };
+
     if (!number && typedNumber !== '0') {
       return '';
     }
@@ -80,13 +90,7 @@ const getNumberEnglishWord = (typedNumber) => {
     } else if (numberLength === 4) {
       getOnes('thousand');
     } else if (numberLength === 5) {
-      const head = number.toString().substr(0, 2);
-      newSolutionPart = `${analyzeNumber(head, true)} thousand`;
-      console.log('new', newSolutionPart);
-
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(2)))
-        analyzeNumber(number.toString().substr(2));
+      getTens('thousand');
     } else if (numberLength === 6) {
       const head = number.toString().substr(0, 3);
       const firstPart = analyzeNumber(head);
@@ -101,11 +105,7 @@ const getNumberEnglishWord = (typedNumber) => {
     } else if (numberLength === 7) {
       getOnes('million');
     } else if (numberLength === 8) {
-      const head = number.toString().substr(0, 2);
-      newSolutionPart = `${analyzeNumber(head, true)} million`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(2)))
-        analyzeNumber(number.toString().substr(2));
+      getTens('million');
     } else if (numberLength === 9) {
       const head = number.toString().substr(0, 3);
       const firstPart = analyzeNumber(head);
@@ -119,12 +119,7 @@ const getNumberEnglishWord = (typedNumber) => {
     } else if (numberLength === 10) {
       getOnes('billion');
     } else if (numberLength === 11) {
-      const head = number.toString().substr(0, 2);
-      analyzeNumber(head);
-      newSolutionPart = `billion`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(2)))
-        analyzeNumber(number.toString().substr(2));
+      getTens('billion');
     } else if (numberLength === 12) {
       const head = number.toString().substr(0, 3);
       const firstPart = analyzeNumber(head);
@@ -138,12 +133,7 @@ const getNumberEnglishWord = (typedNumber) => {
     } else if (numberLength === 13) {
       getOnes('trillion');
     } else if (numberLength === 14) {
-      const head = number.toString().substr(0, 2);
-      analyzeNumber(head);
-      newSolutionPart = `trillion`;
-      solutionParts.push(newSolutionPart);
-      if (Number(number.toString().substr(2)))
-        analyzeNumber(number.toString().substr(2));
+      getTens('trillion');
     } else if (numberLength === 15) {
       const head = number.toString().substr(0, 3);
       const firstPart = analyzeNumber(head);
