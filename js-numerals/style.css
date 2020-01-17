@@ -6,9 +6,6 @@ html {
   height: 100%;
   overflow: hidden;
   background-color: burlywood;
-  --primary-color: rgb(152, 26, 202);
-  --secondary-color: rgb(175, 46, 6);
-  --bg-color: ;
   --white-color: #fff;
   --gray-color: #333;
   font-family: 'Josefin Sans', sans-serif;
@@ -34,6 +31,11 @@ body {
   flex-direction: column;
 }
 
+.hint {
+  color: var(--gray-color);
+  margin: 40px;
+}
+
 .numerical-input {
   height: 62px;
   padding: 5px 15px;
@@ -54,6 +56,13 @@ body {
   font-size: 24px;
   max-width: 80%;
   text-align: center;
+}
+
+.redirection-link {
+  color: var(--gray-color);
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 @media only screen and (max-width: 768px) {
